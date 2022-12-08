@@ -1,85 +1,66 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+
+export default{
+  name: 'App',
+  data() {
+    return {
+      name: "",
+      clicked:false,
+      moviesNameList : []
+    }
+  },
+  methods:{
+    concatenation(name){
+      if(name == ""){
+        throw new Error("test");
+      }else{
+        return "Hello " + name;
+      }
+    },
+
+    getElement(){
+      fetch('https://swapi.py4e.com/api/people/1/')
+      .then(response => {
+        return response.json();
+      }).then(movie => {
+        console.log(movie)
+        let movies = movie.films;
+        for(let i = 0; i < movies.length;i++){
+          fetch(`${movies[i]}`)
+          .then(response => {
+            return response.json();
+          }).then(moviesName => {
+            console.log(moviesName.title)
+            this.moviesNameList.push(moviesName.title);
+          })
+        };
+        console.log(this.moviesNameList);
+      })
+    },
+  }
+}
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
     </div>
   </header>
 
-  <RouterView />
+  <main>
+    <div id="app">
+      <input type="text" v-model="name" placeholder="Rentrez votre nom"/>
+      <button @click="(clicked=true)">Dire bonjour</button>
+      <p v-if="clicked">{{concatenation(name)}}</p>
+      <p v-for="name in moviesNameList">{{name}}</p>
+
+      <button @click="getElement()">Click</button>
+    </div>
+  </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
