@@ -1,20 +1,30 @@
-<script setup>
-new Vue({
-  el: '',
-  methods: {
-    concatenation(name){
-      return "Hello" + name;
+<script >
+import CreatePattern from '../components/CreatePattern.vue';
+export default {
+  name: 'HomeView',
+  components:{
+    CreatePattern,
+  },
+  data() {
+    return {
     }
+  },
+  methods: {
   }
-})
+}
 </script>
 
 <template>
   <main>
-    <div>
-      <input type="text" id="name"/>
-      <h1>test </h1>
-      <button @click="concatenation(name.value)">Dire bonjour</button>
+    <div class="center" id="AddToDo">
+      <h1>Bienvenue sur PatternLister</h1>
+      <CreatePattern/>
     </div>
   </main>
 </template>
+<style>
+#AddToDo{
+  width : 70%;
+}
+
+</style>
