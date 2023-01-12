@@ -1,65 +1,69 @@
 <script>
+import GetAllPattern from './components/GetAllPattern.vue';
 
 export default{
   name: 'App',
+  components:{
+    GetAllPattern
+  },
   data() {
     return {
-      name: "",
-      clicked:false,
-      moviesNameList : []
+      
     }
   },
   methods:{
-    concatenation(name){
-      if(name == ""){
-        throw new Error("test");
-      }else{
-        return "Hello " + name;
-      }
-    },
-
-    getElement(){
-      fetch('https://swapi.py4e.com/api/people/1/')
-      .then(response => {
-        return response.json();
-      }).then(movie => {
-        console.log(movie)
-        let movies = movie.films;
-        for(let i = 0; i < movies.length;i++){
-          fetch(`${movies[i]}`)
-          .then(response => {
-            return response.json();
-          }).then(moviesName => {
-            console.log(moviesName.title)
-            this.moviesNameList.push(moviesName.title);
-          })
-        };
-        console.log(this.moviesNameList);
-      })
-    },
+    accueil(){
+      this.$router.push("/")
+    }
   }
 }
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-    </div>
   </header>
 
   <main>
-    <div id="app">
-      <input type="text" v-model="name" placeholder="Rentrez votre nom"/>
-      <button @click="(clicked=true)">Dire bonjour</button>
-      <p v-if="clicked">{{concatenation(name)}}</p>
-      <p v-for="name in moviesNameList">{{name}}</p>
-
-      <button @click="getElement()">Click</button>
+    <div id="app" class="d-flex center main">
+      <div id="getAll" class="bc-white">
+        <button @click="accueil">Accueil</button>
+        <h2 class="border-B-2-S">Mes Patterns</h2> 
+        <GetAllPattern class="bc-white"/>
+      </div>
+      <RouterView class="bc-white"/>
     </div>
   </main>
 </template>
+<style>
+.d-flex{
+  display: flex;
+}
+#router{
+  width : 70%
+}
+#getAll{
+  width : 30%;
+}
+
+.center{
+  text-align: center;
+}
+.main{
+  width : 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+main{
+  width : 100%;
+  background-color: blue;
+}
+.bc-white{
+  background-color: white;
+}
+.border-B-2-S{
+  border: black 2px solid;
+}
+</style>
 
 
 
