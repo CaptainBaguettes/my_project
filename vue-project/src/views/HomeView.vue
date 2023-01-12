@@ -1,5 +1,5 @@
 <script >
-import CreatePattern from '../components/CreatePattern.vue';
+import CreatePattern from '../components/CreatePattern/CreatePattern.vue';
 export default {
   name: 'HomeView',
   components:{

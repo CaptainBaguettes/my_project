@@ -39,10 +39,8 @@ export default {
                 window.location.reload();
             }else{
                 this.titreNull = true;
-            }
-            
+            }     
         },
-
     }
 }
 </script>

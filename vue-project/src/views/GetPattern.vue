@@ -1,5 +1,5 @@
 <script>
-export default {
+    export default {
     name: 'GetPattern',
     props :{
         parametre:{type : String},
