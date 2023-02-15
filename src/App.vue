@@ -1,5 +1,5 @@
 <script>
-import GetAllPattern from './components/GetAllPattern.vue';
+import GetAllPattern from './components/GetAllPattern/GetAllPattern.vue';
 
 export default{
   name: 'App',
@@ -55,13 +55,9 @@ export default{
 }
 main{
   width : 100%;
-  background-color: blue;
-}
-.bc-white{
-  background-color: white;
 }
 .border-B-2-S{
-  border: black 2px solid;
+  border: black 1px solid;
 }
 </style>
 

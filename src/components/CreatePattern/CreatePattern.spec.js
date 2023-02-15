@@ -1,11 +1,14 @@
-import { describe, it, expect} from 'vitest'
+import { describe, it, expect, vi, beforeEach} from 'vitest'
 import { mount } from '@vue/test-utils'
 import CreatePattern from './CreatePattern.vue'
 
+let wrapper;
 
+beforeEach(() => {
+  wrapper = mount(CreatePattern)
+})
 describe('Test de la methode ajouter pattern', async () => {
   it('test initiale', () => {
-    const wrapper = mount(CreatePattern)
     wrapper.vm.ajouterPattern();
     expect(wrapper.vm.ajouter).toEqual(true);
   })
@@ -13,7 +16,6 @@ describe('Test de la methode ajouter pattern', async () => {
 
 describe('Test de la méthode annuler', async () => {
   it('test initiale', () => {
-    const wrapper = mount(CreatePattern)
     wrapper.setData({
       ajouter : true,
       pattern:{
@@ -33,7 +35,6 @@ describe('Test de la méthode annuler', async () => {
 
 describe('Test de la méthode sauvegarder', async () => {
   it('test pattern.titre est vide', () => {
-    const wrapper = mount(CreatePattern)
     wrapper.setData({
       pattern : {
         titre : ""
@@ -43,7 +44,7 @@ describe('Test de la méthode sauvegarder', async () => {
     expect(wrapper.vm.titreNull).toBe(true)
   }),
   it('test pattern.titre non vide', () => {
-    const wrapper = mount(CreatePattern);
+    const spy = vi.spyOn(window.localStorage.__proto__, "setItem");
     wrapper.setData({
       ajouter : true,
       pattern:{
@@ -52,9 +53,12 @@ describe('Test de la méthode sauvegarder', async () => {
       elements : [{value : "elements1"}, {value : "elements2"},{value : ""},{value : ""}]
     })
 
+
     wrapper.vm.sauvegarder()
 
-    expect(wrapper.vm.pattern).toEqual({titre : "titre", elements : ["elements1","elements2"]})
+    expect(wrapper.vm.pattern).toEqual({titre : "titre", elements : ["elements1","elements2"]});
+    expect(spy).toHaveBeenCalledWith("titre", JSON.stringify(wrapper.vm.pattern));
+    expect(wrapper.vm.ajouter).toBe(false);
 
 
   })
