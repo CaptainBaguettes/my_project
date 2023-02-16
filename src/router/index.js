@@ -15,6 +15,8 @@ const router = createRouter({
       name:'getPattern',
       component: GetPattern,
     }
+    
+
   ]
 })
 

@@ -10,11 +10,15 @@ export default {
   },
   methods: {
     getAllPattern() {
-      let keys = Object.keys(localStorage);
-      let i = keys.length;
-      while (i--) {
-        this.listePattern.push(JSON.parse(localStorage.getItem(keys[i])));
-      }
+      // let keys = Object.keys(localStorage);
+      let values = Object.values(localStorage);
+
+      this.listePattern = values.map(x => JSON.parse(x));
+      console.log(values)
+      // let i = keys.length;
+      // while (i--) {
+      //   this.listePattern.push(JSON.parse(localStorage.getItem(keys[i])));
+      // }
     },
     redirection(param) {
       this.$router.push({ path: param }).then(() => {
