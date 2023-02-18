@@ -50,6 +50,11 @@ npm run lint
 
 my_project
 
-
 npm install 
 npm run dev
+
+Project deploy on firebase at (https://todolist-9aa3e.firebaseapp.com/)
+For the Ci only npm build was made, the test part will come soon with the Unit test part.
+CI triggered on push action on develop branch, and CD on merge on master.
+
+For the technologie choice, i don't make backend parts cause i don't know how to make an API, we haven't seen that in course yet. I haven't do CSS cause i've prefered priorize practicing things we saw in course (versionning, CI, CD).
