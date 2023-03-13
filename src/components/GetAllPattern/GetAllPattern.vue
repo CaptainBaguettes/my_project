@@ -6,19 +6,14 @@ export default {
   data() {
     return {
       listePattern: [],
+      values : []
     }
   },
   methods: {
-    getAllPattern() {
-      // let keys = Object.keys(localStorage);
-      let values = Object.values(localStorage);
+    getAllPatterns() {
+      this.values = Object.values(localStorage);
 
-      this.listePattern = values.map(x => JSON.parse(x));
-      console.log(values)
-      // let i = keys.length;
-      // while (i--) {
-      //   this.listePattern.push(JSON.parse(localStorage.getItem(keys[i])));
-      // }
+      this.listePattern = this.values.map(x => JSON.parse(x));
     },
     redirection(param) {
       this.$router.push({ path: param }).then(() => {
@@ -28,7 +23,7 @@ export default {
     }
   },
   mounted() {
-    this.getAllPattern();
+    this.getAllPatterns();
   }
 }
 </script>

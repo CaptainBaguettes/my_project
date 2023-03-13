@@ -53,14 +53,11 @@ describe('Test de la méthode sauvegarder', async () => {
       elements : [{value : "elements1"}, {value : "elements2"},{value : ""},{value : ""}]
     })
 
-
     wrapper.vm.sauvegarder()
 
     expect(wrapper.vm.pattern).toEqual({titre : "titre", elements : ["elements1","elements2"]});
     expect(spy).toHaveBeenCalledWith("titre", JSON.stringify(wrapper.vm.pattern));
     expect(wrapper.vm.ajouter).toBe(false);
-
-
   })
 })
 
