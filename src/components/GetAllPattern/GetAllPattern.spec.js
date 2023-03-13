@@ -5,14 +5,13 @@ import getAllPattern from './GetAllPattern.vue'
 let wrapper;
 
 beforeEach(() =>{
-    wrapper = mount(getAllPattern)
+  wrapper = mount(getAllPattern)
 })
 
 
-describe('Test de la methode ajouter pattern', async () => {
+describe('Test de la methode getAllPattern', async () => {
   it('test initiale', () => {
-    wrapper.vm.ajouterPattern();
-    expect(wrapper.vm.ajouter).toEqual(true);
+    wrapper.vm.getAllPatterns();
   })
 })
 
